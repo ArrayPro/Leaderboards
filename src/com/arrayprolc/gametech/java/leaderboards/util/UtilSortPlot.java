@@ -45,5 +45,15 @@ public class UtilSortPlot {
 		}
 		return result;
 	}
+	
+	public static int getID(int row){
+		switch(row){
+		case 0: return 0;
+		case 1: return 1;
+		case 2: return 0;
+		case 3: return 1;
+		default: return 0;
+		}
+	}
 
 }

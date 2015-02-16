@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import me.kyle.plotz.api.Plotz;
 import me.kyle.plotz.obj.Plot;
 
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -40,19 +41,20 @@ public class UtilOpenMenu {
 				ArrayList<Plot> plots = new ArrayList<Plot>();
 
 				for (OfflinePlayer p2 : Bukkit.getOfflinePlayers()) {
-					plots.addAll(Plotz.getAllPlots(p2.getUniqueId(),
-							LeaderboardsCore.getInstance().getPlotWorld()));
+					for (Plot plot : Plotz.getAllPlots(p2.getUniqueId(),
+							LeaderboardsCore.getInstance().getPlotWorld())) {
+						if (plot.getLikes() != 0) {
+							plots.add(plot);
+						}
+					}
 				}
+
 				plots = UtilSortPlot.sortPlots(plots);
 				Plot obj = plots.get(starting + counter);
-				i.setItem(UtilMenu.getAllowedSlots()[counter], ItemUtils
-						.setNameAndLore(
-								new ItemStack(Material.STONE),
-								"§b" + obj.getOwnerName() + "§7's plot #"
-										+ obj.getHomeNumber(), new String[] {
-										"§7Click to teleport!",
-										"§7Likes: §9" + obj.getLikes(),
-										"§7Biome: §9" + obj.getBiome() }));
+				byte type = UtilItem.getData(page)[0];
+				i.setItem(UtilMenu.getAllowedSlots()[counter], ItemUtils .setNameAndLore(new ItemStack(Material.STAINED_CLAY, 1, UtilItem.getData(page)[UtilSortPlot.getID(counter/7)]), 
+					"§b" + obj.getOwnerName() + "'s§7 plot #" + obj.getHomeNumber(), 
+					new String[] { "§aClick to teleport!", "", "§7Likes: §9" + obj.getLikes(), "§7Biome: §9" + WordUtils.capitalize(obj.getBiome().toLowerCase())}));
 			} catch (Exception ex) {
 			}
 		}
@@ -65,7 +67,7 @@ public class UtilOpenMenu {
 					new ItemStack(Material.ARROW), "§c<§c§m--§c Go Back",
 					"§7Close menu."));
 		}
-		if (i.getItem(43) == null) {
+		if (i.getItem(43) == null || page == 5) {
 			i.setItem(50, ItemUtils.setNameAndLore(
 					new ItemStack(Material.ARROW), "§cNext page §c§m--§c>",
 					"§7Close menu."));
