@@ -59,7 +59,7 @@ public class UtilSortPlot {
 	}
 	
 	public static ChatColor getChatColor(int current){
-		if(current == 0){
+		if(current == 1){
 			return ChatColor.GOLD;
 		}
 		return ChatColor.GRAY;
