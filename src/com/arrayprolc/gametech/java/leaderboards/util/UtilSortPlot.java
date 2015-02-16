@@ -24,9 +24,6 @@ public class UtilSortPlot {
 		plots = (HashMap<Plot, Integer>) sortByValue(plots);
 		output.addAll(plots.keySet());
 		Collections.reverse(output);
-		for (Plot p : output) {
-			System.out.println(p.getLikes());
-		}
 		return output;
 	}
 

@@ -49,8 +49,10 @@ public class UtilOpenMenu {
 						.setNameAndLore(
 								new ItemStack(Material.STONE),
 								"§b" + obj.getOwnerName() + "§7's plot #"
-										+ obj.getHomeNumber(), "§7Likes: §9"
-										+ obj.getLikes()));
+										+ obj.getHomeNumber(), new String[] {
+										"§7Click to teleport!",
+										"§7Likes: §9" + obj.getLikes(),
+										"§7Biome: §9" + obj.getBiome() }));
 			} catch (Exception ex) {
 			}
 		}
