@@ -20,7 +20,7 @@ public class LeaderboardsCore extends JavaPlugin {
 	}
 	
 	public void setupCommands(){
-		getCommand("basic").setExecutor(new CommandLeaderboard());
+		getCommand("leaderboard").setExecutor(new CommandLeaderboard());
 	}
 
 	public static LeaderboardsCore getInstance() {
