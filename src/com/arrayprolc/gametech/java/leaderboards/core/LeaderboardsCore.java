@@ -13,6 +13,8 @@ public class LeaderboardsCore extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 		getConfig();
+		setupListeners();
+		setupCommands();
 	}
 	
 	public void setupListeners(){
