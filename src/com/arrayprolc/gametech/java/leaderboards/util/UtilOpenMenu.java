@@ -25,9 +25,8 @@ public class UtilOpenMenu {
 	 *            The page you want to use.
 	 * @return the inventory the player just opened
 	 */
-	@SuppressWarnings("deprecation")
 	public static Inventory openInventory(Player p, int page) {
-		
+
 		if (page == 0) {
 			page = 1;
 		} else {
@@ -39,15 +38,19 @@ public class UtilOpenMenu {
 		for (int counter = 0; counter < UtilMenu.getAllowedSlots().length; counter++) {
 			try {
 				ArrayList<Plot> plots = new ArrayList<Plot>();
-				
-				for(OfflinePlayer p2 : Bukkit.getOfflinePlayers()){
-					plots.addAll(Plotz.getAllPlots(p2.getUniqueId(), LeaderboardsCore.getInstance().getPlotWorld()));
+
+				for (OfflinePlayer p2 : Bukkit.getOfflinePlayers()) {
+					plots.addAll(Plotz.getAllPlots(p2.getUniqueId(),
+							LeaderboardsCore.getInstance().getPlotWorld()));
 				}
-				for(Player p2 : Bukkit.getOnlinePlayers()){
-					plots.addAll(Plotz.getAllPlots(p2.getUniqueId(), LeaderboardsCore.getInstance().getPlotWorld()));
-				}
+				plots = UtilSortPlot.sortPlots(plots);
 				Plot obj = plots.get(starting + counter);
-				i.setItem(UtilMenu.getAllowedSlots()[counter], ItemUtils.setName(new ItemStack(Material.STONE), "§b" + obj.getOwnerName() + "§7's plot"));
+				i.setItem(UtilMenu.getAllowedSlots()[counter], ItemUtils
+						.setNameAndLore(
+								new ItemStack(Material.STONE),
+								"§b" + obj.getOwnerName() + "§7's plot #"
+										+ obj.getHomeNumber(), "§7Likes: §9"
+										+ obj.getLikes()));
 			} catch (Exception ex) {
 			}
 		}
@@ -73,6 +76,5 @@ public class UtilOpenMenu {
 		p.openInventory(i);
 		return i;
 	}
-
 
 }

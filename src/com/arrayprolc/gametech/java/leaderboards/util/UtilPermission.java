@@ -32,10 +32,9 @@ public class UtilPermission {
 			// Also, info.* isn't currently a viable permission, but it's mainly
 			// there as a placeholder at the moment.
 			LeaderboardsCore.getInstance().getConfig()
-					.set("allowedDefault", "leaderboards.open");
+					.set("allowedDefault", "open");
 			LeaderboardsCore.getInstance().saveConfig();
-
-			if (permission.equalsIgnoreCase("leaderboards.open")) {
+			if (permission.equalsIgnoreCase("open")) {
 				return true;
 			}
 		}

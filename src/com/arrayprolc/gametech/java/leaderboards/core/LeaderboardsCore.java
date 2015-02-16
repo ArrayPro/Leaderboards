@@ -12,16 +12,19 @@ public class LeaderboardsCore extends JavaPlugin {
 
 	public void onEnable() {
 		instance = this;
-		getConfig();
+		reloadConfig();
+		getConfig().set("configVersion", getDescription().getVersion() + "");
+		saveConfig();
 		setupListeners();
 		setupCommands();
 	}
-	
-	public void setupListeners(){
-		Bukkit.getServer().getPluginManager().registerEvents(new MenuClickListener(), this);
+
+	public void setupListeners() {
+		Bukkit.getServer().getPluginManager()
+				.registerEvents(new MenuClickListener(), this);
 	}
-	
-	public void setupCommands(){
+
+	public void setupCommands() {
 		getCommand("leaderboard").setExecutor(new CommandLeaderboard());
 	}
 

@@ -1,5 +1,5 @@
 name: Leaderboards
 main: com.arrayprolc.gametech.java.leaderboards.core.LeaderboardsCore
-version: 0.1
+version: 1.0
 commands:
    leaderboard:
