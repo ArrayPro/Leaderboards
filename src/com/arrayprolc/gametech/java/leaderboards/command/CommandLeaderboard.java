@@ -30,7 +30,7 @@ public class CommandLeaderboard implements CommandExecutor {
 		}
 		
 		if(target == null){
-			CommandSenderUtils.sendMessage(sender, "§4ERROR: §7That is not a valid player!");
+			CommandSenderUtils.sendMessage(sender, "§4§lERROR: §7That is not a valid player!");
 		}
 
 		return false;
