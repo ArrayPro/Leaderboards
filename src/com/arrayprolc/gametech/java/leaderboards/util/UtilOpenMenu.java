@@ -35,25 +35,26 @@ public class UtilOpenMenu {
 		}
 		Inventory i = Bukkit.createInventory(null, 9 * 6, "Leaderboard | page "
 				+ page);
+		ArrayList<Plot> plots = new ArrayList<Plot>();
+
+		for (OfflinePlayer p2 : Bukkit.getOfflinePlayers()) {
+			for (Plot plot : Plotz.getAllPlots(p2.getUniqueId(),
+					LeaderboardsCore.getInstance().getPlotWorld())) {
+				if (plot.getLikes() != 0) {
+					plots.add(plot);
+				}
+			}
+		}
 		int starting = (page - 1) * UtilMenu.getAllowedSlots().length;
 		for (int counter = 0; counter < UtilMenu.getAllowedSlots().length; counter++) {
 			try {
-				ArrayList<Plot> plots = new ArrayList<Plot>();
-
-				for (OfflinePlayer p2 : Bukkit.getOfflinePlayers()) {
-					for (Plot plot : Plotz.getAllPlots(p2.getUniqueId(),
-							LeaderboardsCore.getInstance().getPlotWorld())) {
-						if (plot.getLikes() != 0) {
-							plots.add(plot);
-						}
-					}
-				}
-
 				plots = UtilSortPlot.sortPlots(plots);
 				Plot obj = plots.get(starting + counter);
 				byte type = UtilItem.getData(page)[0];
+				int counterHuman = starting + counter;
+				counterHuman++;
 				i.setItem(UtilMenu.getAllowedSlots()[counter], ItemUtils .setNameAndLore(new ItemStack(Material.STAINED_CLAY, 1, UtilItem.getData(page)[UtilSortPlot.getID(counter/7)]), 
-					"§b" + obj.getOwnerName() + "'s§7 plot #" + obj.getHomeNumber(), 
+					"§b" + obj.getOwnerName() + "'s§7 plot " + UtilSortPlot.getChatColor(counterHuman) + "#" + counterHuman, 
 					new String[] { "§aClick to teleport!", "", "§7Likes: §9" + obj.getLikes(), "§7Biome: §9" + WordUtils.capitalize(obj.getBiome().toLowerCase())}));
 			} catch (Exception ex) {
 			}

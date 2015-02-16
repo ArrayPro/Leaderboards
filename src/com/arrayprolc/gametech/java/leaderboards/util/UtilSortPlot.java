@@ -12,6 +12,8 @@ import java.util.Map;
 
 import me.kyle.plotz.obj.Plot;
 
+import org.bukkit.ChatColor;
+
 public class UtilSortPlot {
 
 	@SuppressWarnings("unchecked")
@@ -54,6 +56,13 @@ public class UtilSortPlot {
 		case 3: return 1;
 		default: return 0;
 		}
+	}
+	
+	public static ChatColor getChatColor(int current){
+		if(current == 0){
+			return ChatColor.GOLD;
+		}
+		return ChatColor.GRAY;
 	}
 
 }
